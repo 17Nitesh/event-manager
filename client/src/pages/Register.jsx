@@ -30,7 +30,6 @@ const Register = () => {
                 "https://event-manager-gi76.onrender.com/api/auth/register",
                 formData
             );
-            localStorage.setItem("token", data.token);
             navigate("/events");
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed");
