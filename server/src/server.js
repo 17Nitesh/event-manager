@@ -10,7 +10,7 @@ dotenv.config();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: "https://event-manager-pied-theta.vercel.app",
     },
 });
 
