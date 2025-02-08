@@ -1,146 +1,96 @@
-Event Management Application
-A real-time event management platform that allows users to create, join, and manage events with live attendance tracking.
-Features
+# Event Management Platform
 
-User Authentication
+## Overview
+This is a full-stack event management platform that allows users to create, join, and manage events in real-time. The application features real-time attendee tracking using **Socket.IO**, secure authentication with **JWT**, cloud-based image storage via **Cloudinary**, and a modern UI built with **React** and **Tailwind CSS**.
 
-Secure login and registration
-JWT-based authentication
-Protected routes
+## Features
+- **User Authentication**: Secure login & signup using JWT.
+- **Event Creation & Management**: Users can create, edit, and delete events.
+- **Real-time Attendee Count**: Live updates when users join or leave events.
+- **Cloudinary Integration**: Upload images for event banners.
+- **Socket.IO Integration**: Real-time event interactions.
+- **Responsive UI**: Built using React and Tailwind CSS.
 
+## Tech Stack
+### Frontend
+- React
+- Tailwind CSS
+- Axios
+- React Router
+- Socket.IO Client
 
-Event Management
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose ORM)
+- JWT Authentication
+- Cloudinary for image hosting
+- Socket.IO for real-time updates
 
-Create new events with detailed information
-Upload event images
-Edit and delete events (owner only)
-View event details
-Real-time attendance tracking
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (v16+ recommended)
+- **MongoDB** (local or cloud via MongoDB Atlas)
 
+### Clone the Repository
+```sh
+git clone https://github.com/yourusername/event-management-platform.git
+cd event-management-platform
+```
 
-Real-time Features
-
-Live attendee count updates
-Socket.io integration for real-time communication
-Instant updates when users join or leave events
-
-
-
-Technology Stack
-Frontend
-
-React.js
-React Router for navigation
-Socket.io-client for real-time updates
-Tailwind CSS for styling
-Lucide React for icons
-Axios for API requests
-
-Backend
-
-Node.js
-Express.js
-MongoDB with Mongoose
-Socket.io for real-time communication
-Cloudinary for image storage
-JWT for authentication
-
-Prerequisites
-Before running this application, make sure you have:
-
-Node.js (v14 or higher)
-MongoDB
-Cloudinary account
-npm or yarn package manager
-
-Installation
-
-Clone the repository:
-
-bashCopygit clone [your-repo-link]
-cd [your-project-name]
-
-Install dependencies:
-
-For backend:
-bashCopycd backend
+### Backend Setup
+```sh
+cd server
 npm install
-For frontend:
-bashCopycd frontend
-npm install
+```
 
-Set up environment variables:
+#### Create a `.env` file in the `server` directory with the following:
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
 
-Create a .env file in the backend directory with:
-envCopyPORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-Create a .env file in the frontend directory with:
-envCopyREACT_APP_API_URL=http://localhost:5000
-Running the Application
-
-Start the backend server:
-
-bashCopycd backend
-npm run dev
-
-Start the frontend development server:
-
-bashCopycd frontend
+#### Run the Server
+```sh
 npm start
-The application will be available at http://localhost:3000
-API Endpoints
-Authentication
+```
 
-POST /api/auth/register - Register a new user
-POST /api/auth/login - Login user
+### Frontend Setup
+```sh
+cd ../client
+yarn install
+```
 
-Events
+#### Run the Frontend
+```sh
+yarn dev
+```
 
-GET /api/events - Get all events
-GET /api/events/:id - Get specific event
-POST /api/events - Create new event
-PUT /api/events/:id - Update event
-DELETE /api/events/:id - Delete event
-POST /api/events/:id/join - Join event
-POST /api/events/:id/leave - Leave event
+## API Endpoints
+### Authentication
+- **POST** `/api/auth/signup` - Register a new user
+- **POST** `/api/auth/login` - Login user & receive token
 
-Socket Events
-Client Events
+### Events
+- **GET** `/api/events` - Get all events
+- **POST** `/api/events` - Create a new event (Auth required)
+- **GET** `/api/events/:id` - Get a specific event
+- **PUT** `/api/events/:id` - Update an event (Auth required)
+- **DELETE** `/api/events/:id` - Delete an event (Auth required)
+- **POST** `/api/events/:id/join` - Join an event
+- **POST** `/api/events/:id/leave` - Leave an event
 
-join_event - Emitted when a user joins an event
-leave_event - Emitted when a user leaves an event
+## WebSockets (Real-time Features)
+- `join_event` - User joins an event
+- `leave_event` - User leaves an event
+- `update_attendee_count` - Updates frontend with the latest attendee count
 
-Server Events
+## Contributing
+Feel free to contribute to this project by opening an issue or submitting a pull request.
 
-update_attendee_count - Broadcast updated attendee count
 
-Project Structure
-Copy├── backend
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-│
-├── frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── config/
-│   │   └── App.js
-│   └── package.json
-│
-└── README.md
-Contributing
-
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
