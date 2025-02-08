@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor settings
+.vscode/
+.idea/
+.DS_Store
+
+# Build files
+dist/
+build/
+
+# Database & system files
+*.sqlite
+*.sqlite-journal
+coverage/
+
+# Process file
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore uploads if stored locally
+uploads/
+public/uploads/
