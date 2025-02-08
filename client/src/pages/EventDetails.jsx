@@ -28,7 +28,7 @@ const EventPage = () => {
     };
 
     useEffect(() => {
-        if (!token) return;
+        if (!userId) return;
 
         // Initial fetch
         fetchEvent();
@@ -48,7 +48,7 @@ const EventPage = () => {
     }, [id, userId, token]);
 
     const handleJoinLeave = async () => {
-        if (!token) {
+        if (!userId) {
             alert("Please log in to join this event.");
             return;
         }
@@ -92,7 +92,7 @@ const EventPage = () => {
         }
     };
 
-    if (!token) {
+    if (!userId) {
         return <p>Please <Link to="/login" className="text-blue-500">log in</Link> to view this event.</p>;
     }
 
