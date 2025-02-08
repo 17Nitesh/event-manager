@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // ✅ Change this when deployed
+const socket = io("https://event-manager-gi76.onrender.com"); // ✅ Change this when deployed
 
 export default socket;
