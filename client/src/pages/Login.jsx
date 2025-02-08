@@ -20,7 +20,7 @@ const Login = () => {
         setIsLoading(true);
         try {
             const { data } = await axios.post(
-                "http://localhost:5000/api/auth/login",
+                "https://event-manager-gi76.onrender.com/api/auth/login",
                 formData
             );
             console.log(data);
