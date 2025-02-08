@@ -16,7 +16,7 @@ const EventPage = () => {
 
     const fetchEvent = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/events/${id}`);
+            const { data } = await axios.get(`https://event-manager-gi76.onrender.com/api/events/${id}`);
             console.log("Fetched event data:", data);
             setEvent(data);
             setAttendeeCount(data.atendees.length);
@@ -56,14 +56,14 @@ const EventPage = () => {
         try {
             if (isJoined) {
                 console.log("Attempting to leave event");
-                await axios.post(`http://localhost:5000/api/events/${id}/leave`, {}, {
+                await axios.post(`https://event-manager-gi76.onrender.com/api/events/${id}/leave`, {}, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 console.log("Successfully left event");
                 socket.emit("leave_event", { eventId: id, userId });
             } else {
                 console.log("Attempting to join event");
-                await axios.post(`http://localhost:5000/api/events/${id}/join`, {}, {
+                await axios.post(`https://event-manager-gi76.onrender.com/api/events/${id}/join`, {}, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 console.log("Successfully joined event");
@@ -81,7 +81,7 @@ const EventPage = () => {
         if (!window.confirm("Are you sure you want to delete this event?")) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/events/${id}`, {
+            await axios.delete(`https://event-manager-gi76.onrender.com/api/events/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert("Event deleted successfully!");
