@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import axios from "axios";
@@ -9,6 +9,13 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/events");
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,11 +30,10 @@ const Login = () => {
                 "https://event-manager-gi76.onrender.com/api/auth/login",
                 formData
             );
-            console.log(data);
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data._id);
-            const redirectUrl = localStorage.getItem('redirectUrl') || '/events';
-            localStorage.removeItem('redirectUrl'); // Clear the stored URL
+            const redirectUrl = localStorage.getItem("redirectUrl") || "/events";
+            localStorage.removeItem("redirectUrl"); // Clear stored URL
             navigate(redirectUrl);
         } catch (err) {
             setError(err.response?.data?.message || "Login failed");
