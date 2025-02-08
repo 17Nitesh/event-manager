@@ -20,7 +20,7 @@ const Register = () => {
         setIsLoading(true);
         try {
             const { data } = await axios.post(
-                "http://localhost:5000/api/auth/register",
+                "https://event-manager-gi76.onrender.com/api/auth/register",
                 formData
             );
             localStorage.setItem("token", data.token);
