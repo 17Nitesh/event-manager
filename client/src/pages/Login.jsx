@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("userId");
         if (token) {
             navigate("/events");
         }
