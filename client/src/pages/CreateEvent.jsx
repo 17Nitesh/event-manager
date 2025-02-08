@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreateEvent = () => {
@@ -15,14 +15,20 @@ const CreateEvent = () => {
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const userId = localStorage.getItem("userId");
+
+    // Redirect if user is not logged in
+    useEffect(() => {
+        if (!userId) {
+            navigate("/login");
+        }
+    }, [userId, navigate]);
 
     const handleChange = (e) => {
         if (e.target.name === "image") {
             setFormData({ ...formData, image: e.target.files[0] });
         } else if (e.target.name === "startDate" || e.target.name === "endDate") {
-            // Convert the datetime-local value to ISO format
-            const date = new Date(e.target.value);
-            setFormData({ ...formData, [e.target.name]: date.toISOString() });
+            setFormData({ ...formData, [e.target.name]: new Date(e.target.value).toISOString() });
         } else {
             setFormData({ ...formData, [e.target.name]: e.target.value });
         }
@@ -51,15 +57,8 @@ const CreateEvent = () => {
         }
     };
 
-    if (localStorage.getItem("token") === null) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-50 to-blue-50">
-                <h1 className="text-4xl font-bold text-gray-800 mt-10">Please login to view events</h1>
-                <Link to="/login" className="mt-6 px-6 py-3 bg-teal-600 text-white font-medium rounded-lg shadow-md hover:bg-teal-700 transition">
-                    Login
-                </Link>
-            </div>
-        );
+    if (!userId) {
+        return null; // Prevents rendering while redirecting
     }
 
     return (
