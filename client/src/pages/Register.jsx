@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import axios from "axios";
@@ -9,6 +9,13 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/events");
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +31,7 @@ const Register = () => {
                 formData
             );
             localStorage.setItem("token", data.token);
-            navigate("/login");
+            navigate("/events");
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed");
         } finally {
