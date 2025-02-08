@@ -39,7 +39,7 @@ const CreateEvent = () => {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.post("http://localhost:5000/api/events", formDataToSend, {
+            await axios.post("https://event-manager-gi76.onrender.com/api/events", formDataToSend, {
                 headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
             });
 
